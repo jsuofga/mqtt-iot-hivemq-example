@@ -1,0 +1,425 @@
+[
+    {
+        "id": "198357572bdf2a17",
+        "type": "tab",
+        "label": "mqtt",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "75d178cd31faa601",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "5f06cdd1ba6f41858989ad188f4478bb.s2.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "c16540f21e1e69f5",
+        "type": "mqtt in",
+        "z": "198357572bdf2a17",
+        "name": "Subscribe to Hive MQ 'Dart/Mqtt_client/octava/testtopic/pi'",
+        "topic": "Dart/Mqtt_client/octava/testtopic/pi",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "75d178cd31faa601",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 200,
+        "wires": [
+            [
+                "95cf01956c28d4d5"
+            ]
+        ]
+    },
+    {
+        "id": "0b1ac73d86b9c599",
+        "type": "cpu",
+        "z": "198357572bdf2a17",
+        "name": "",
+        "msgCore": false,
+        "msgOverall": false,
+        "msgArray": false,
+        "msgTemp": true,
+        "x": 370,
+        "y": 460,
+        "wires": [
+            [
+                "c4c7acc374e20afd"
+            ]
+        ]
+    },
+    {
+        "id": "8e20f4af920de98a",
+        "type": "inject",
+        "z": "198357572bdf2a17",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "0b1ac73d86b9c599"
+            ]
+        ]
+    },
+    {
+        "id": "c4c7acc374e20afd",
+        "type": "function",
+        "z": "198357572bdf2a17",
+        "name": "function 2",
+        "func": "msg.topic = 'Dart/Mqtt_client/octava/testtopic/pi'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 460,
+        "wires": [
+            [
+                "75df78fddc34e7d6"
+            ]
+        ]
+    },
+    {
+        "id": "75df78fddc34e7d6",
+        "type": "mqtt out",
+        "z": "198357572bdf2a17",
+        "name": "Publish to Hive MQ topic 'cpu_temperature'",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "75d178cd31faa601",
+        "x": 890,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "237a19551aad5395",
+        "type": "rpi-gpio out",
+        "z": "198357572bdf2a17",
+        "name": "",
+        "pin": "4",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 980,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "95cf01956c28d4d5",
+        "type": "switch",
+        "z": "198357572bdf2a17",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "pin7_gpio4",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "pin11_gpio17",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "pin12_gpio18",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "pin13_gpio27",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 550,
+        "y": 200,
+        "wires": [
+            [
+                "494a8ac1c39aa5b5"
+            ],
+            [
+                "aa3ea5f59024b005"
+            ],
+            [
+                "a8d946530b89fd94"
+            ],
+            [
+                "da6527891e6c64ab"
+            ]
+        ]
+    },
+    {
+        "id": "45632924d0e371a4",
+        "type": "rpi-gpio out",
+        "z": "198357572bdf2a17",
+        "name": "",
+        "pin": "17",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 1000,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "b73a585265d10f7c",
+        "type": "rpi-gpio out",
+        "z": "198357572bdf2a17",
+        "name": "",
+        "pin": "18",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 1000,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "56ac0648feffcc59",
+        "type": "rpi-gpio out",
+        "z": "198357572bdf2a17",
+        "name": "",
+        "pin": "27",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 1000,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "494a8ac1c39aa5b5",
+        "type": "function",
+        "z": "198357572bdf2a17",
+        "name": "pin7_gpio4_on_off",
+        "func": "if (msg.payload =='pin7_gpio4_on'){\n    msg.payload = 1;\n} else if (msg.payload == 'pin7_gpio4_off'){\n    msg.payload = 0;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 120,
+        "wires": [
+            [
+                "237a19551aad5395",
+                "45c825464dbd4a87"
+            ]
+        ]
+    },
+    {
+        "id": "aa3ea5f59024b005",
+        "type": "function",
+        "z": "198357572bdf2a17",
+        "name": "pin11_gpio17_on_off",
+        "func": "if (msg.payload =='pin11_gpio17_on'){\n    msg.payload = 1;\n} else if (msg.payload == 'pin11_gpio17_off'){\n    msg.payload = 0;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 220,
+        "wires": [
+            [
+                "45632924d0e371a4",
+                "03f22fda1b24cdfa"
+            ]
+        ]
+    },
+    {
+        "id": "a8d946530b89fd94",
+        "type": "function",
+        "z": "198357572bdf2a17",
+        "name": "pin18_gpio18_on_off",
+        "func": "if (msg.payload =='pin12_gpio18_on'){\n    msg.payload = 1;\n} else if (msg.payload == 'pin12_gpio18_off'){\n    msg.payload = 0;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 300,
+        "wires": [
+            [
+                "b73a585265d10f7c",
+                "4f2b94891041758d"
+            ]
+        ]
+    },
+    {
+        "id": "da6527891e6c64ab",
+        "type": "function",
+        "z": "198357572bdf2a17",
+        "name": "pin13_gpio27_on_off",
+        "func": "if (msg.payload =='pin13_gpio27_on'){\n    msg.payload = 1;\n} else if (msg.payload == 'pin13_gpio27_off'){\n    msg.payload = 0;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 380,
+        "wires": [
+            [
+                "56ac0648feffcc59",
+                "1281fabd64a4b1d7"
+            ]
+        ]
+    },
+    {
+        "id": "e5738b813d2498f4",
+        "type": "comment",
+        "z": "198357572bdf2a17",
+        "name": "turn gpio pins on / off",
+        "info": "",
+        "x": 240,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "9943d559c42fa39a",
+        "type": "comment",
+        "z": "198357572bdf2a17",
+        "name": "send cpu temperature every 10 seconds",
+        "info": "",
+        "x": 290,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "45c825464dbd4a87",
+        "type": "debug",
+        "z": "198357572bdf2a17",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "03f22fda1b24cdfa",
+        "type": "debug",
+        "z": "198357572bdf2a17",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "4f2b94891041758d",
+        "type": "debug",
+        "z": "198357572bdf2a17",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "1281fabd64a4b1d7",
+        "type": "debug",
+        "z": "198357572bdf2a17",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "9f7ccd091c57c831",
+        "type": "comment",
+        "z": "198357572bdf2a17",
+        "name": "Make sure to enter your HiveMQ or MQTT broker cluster and credentials ",
+        "info": "",
+        "x": 270,
+        "y": 260,
+        "wires": []
+    }
+]
